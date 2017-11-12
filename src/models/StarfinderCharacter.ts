@@ -1,4 +1,4 @@
-import { ID, Model, Field } from 'ghoti';
+import { Model, Field } from 'ghoti';
 import Character, {CharacterFields} from './Character';
 
 import calculateAbilityScoreModifier from '../utilities//abilityScoreModifierCalculator';

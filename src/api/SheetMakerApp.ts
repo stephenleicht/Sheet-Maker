@@ -6,6 +6,9 @@ import StarfinderCharacter from '../models/StarfinderCharacter';
 
 export default function run() {
     ghoti.configure({
+        username: 'stephen',
+        password: 'Welcome123',
+        port: 4000,
         models: [
             StarfinderCharacter
         ]

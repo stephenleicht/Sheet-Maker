@@ -2,6 +2,7 @@
   "name": "sheet-maker",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000/",
   "dependencies": {
     "ghoti": "^0.1.1",
     "react": "^16.1.0",

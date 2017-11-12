@@ -16,7 +16,12 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "baseUrl": "./..",
+    "paths": {
+      "ghoti": ["ghoti/*"]
+    }
   },
   "exclude": [
     "node_modules",
