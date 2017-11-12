@@ -1,11 +1,12 @@
 import * as React from 'react';
 
-import StarfinderCharacter from '../../models/StarfinderCharacter';
+import StarfinderCharacter from '../../engines/starfinder/StarfinderCharacter';
 
 import { getCharacterByID } from './CharacterSheetActions';
 
 import SectionHeading from './SectionHeading';
 import AbilityScoreTable from './AbilityScoreTable';
+import SkillsTable from './SkillsTable';
 // import * as styles from './CharacterSheet.css';
 
 
@@ -56,6 +57,12 @@ export default class CharacterSheet extends React.Component<{}, CharacterSheetSt
                     Ability Scores
                 </SectionHeading>
                 <AbilityScoreTable value={value} />
+                <SectionHeading>
+                    Skills
+                </SectionHeading>
+                <SkillsTable 
+                    character={value}
+                />
             </div>
         )
     }

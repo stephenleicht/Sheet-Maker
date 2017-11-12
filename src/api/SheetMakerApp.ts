@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import ghoti from 'ghoti'
 
-import StarfinderCharacter from '../models/StarfinderCharacter';
+import StarfinderCharacter from '../engines/starfinder/StarfinderCharacter';
 
 
 export default function run() {
