@@ -1,1 +1,1 @@
-export const characterSheet: string;
+export {};

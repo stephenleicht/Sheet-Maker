@@ -95,7 +95,7 @@ module.exports = {
       '.jsx',
     ],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -150,7 +150,7 @@ module.exports = {
           {
             test: /\.(ts|tsx)$/,
             include: paths.appSrc,
-            loader: require.resolve('ts-loader'),
+            loader: require.resolve('awesome-typescript-loader'),
           },
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -160,33 +160,36 @@ module.exports = {
           {
             test: /\.css$/,
             use: [
-              require.resolve('style-loader'),
               {
-                loader: require.resolve('css-loader'),
-                options: {
-                  importLoaders: 1,
-                },
+                loader: require.resolve('style-loader')
               },
               {
-                loader: require.resolve('postcss-loader'),
+                loader: require.resolve('typings-for-css-modules-loader'),
                 options: {
-                  // Necessary for external CSS imports to work
-                  // https://github.com/facebookincubator/create-react-app/issues/2677
-                  ident: 'postcss',
-                  plugins: () => [
-                    require('postcss-flexbugs-fixes'),
-                    autoprefixer({
-                      browsers: [
-                        '>1%',
-                        'last 4 versions',
-                        'Firefox ESR',
-                        'not ie < 9', // React doesn't support IE8 anyway
-                      ],
-                      flexbox: 'no-2009',
-                    }),
-                  ],
-                },
+                  modules: true,
+                  namedExport: true
+                }
               },
+              // {
+              //   loader: require.resolve('postcss-loader'),
+              //   options: {
+              //     // Necessary for external CSS imports to work
+              //     // https://github.com/facebookincubator/create-react-app/issues/2677
+              //     ident: 'postcss',
+              //     plugins: () => [
+              //       require('postcss-flexbugs-fixes'),
+              //       autoprefixer({
+              //         browsers: [
+              //           '>1%',
+              //           'last 4 versions',
+              //           'Firefox ESR',
+              //           'not ie < 9', // React doesn't support IE8 anyway
+              //         ],
+              //         flexbox: 'no-2009',
+              //       }),
+              //     ],
+              //   },
+              // },
             ],
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
@@ -244,6 +247,9 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.WatchIgnorePlugin([
+      /css\.d\.ts$/
+    ]),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

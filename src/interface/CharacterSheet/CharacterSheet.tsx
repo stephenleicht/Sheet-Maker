@@ -2,10 +2,12 @@ import * as React from 'react';
 
 import StarfinderCharacter from '../../models/StarfinderCharacter';
 
-import {getCharacterByID} from './CharacterSheetActions';
+import { getCharacterByID } from './CharacterSheetActions';
 
 import SectionHeading from './SectionHeading';
+import AbilityScoreTable from './AbilityScoreTable';
 // import * as styles from './CharacterSheet.css';
+
 
 export interface CharacterSheetState {
     value?: StarfinderCharacter,
@@ -35,7 +37,7 @@ export default class CharacterSheet extends React.Component<{}, CharacterSheetSt
     render() {
         const { value } = this.state;
 
-        if(!value) {
+        if (!value) {
             return null;
         }
 
@@ -50,12 +52,10 @@ export default class CharacterSheet extends React.Component<{}, CharacterSheetSt
                 <div>
                     {value.name}
                 </div>
-                <div>
-                    Strength Mod
-                </div>
-                <div>
-                    {value.strengthModifier}
-                </div>
+                <SectionHeading>
+                    Ability Scores
+                </SectionHeading>
+                <AbilityScoreTable value={value} />
             </div>
         )
     }

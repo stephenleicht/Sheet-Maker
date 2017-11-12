@@ -1,4 +1,10 @@
 .sectionHeading {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-family: 'Ubuntu', sans-serif;
+
+    text-transform: uppercase;
+    background-color: #619dc7;
+    padding: 8px 16px;
+    color: white;
+    margin: 8px 0;
 }
