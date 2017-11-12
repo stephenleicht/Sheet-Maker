@@ -1,0 +1,18 @@
+.wrapper {
+    display: inline-block;
+}
+
+.abbreviation {
+    text-transform: uppercase;
+    background-color: black;
+    color: white;
+    text-align: center;
+
+    display: inline;
+    padding: 4px 8px;
+}
+
+.label {
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
