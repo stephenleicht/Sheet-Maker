@@ -1,7 +1,10 @@
+import {Model, Field} from 'ghoti';
 import SkillState from "./SkillState";
 
 import AcrobaticsDescriptor from './descriptors/AcrobaticsDescriptor';
 
+@Model()
 export default class StarfinderSkills {
-    acrobatics = new SkillState(AcrobaticsDescriptor);
+    @Field()
+    acrobatics: SkillState = new SkillState(AcrobaticsDescriptor);
 }
