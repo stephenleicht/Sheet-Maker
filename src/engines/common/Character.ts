@@ -61,7 +61,7 @@ export default class Character implements CharacterFields {
         return calculateAbilityScoreModifier(this.charisma);
     }
 
-    constructor(fields: CharacterFields) {
+    constructor(fields: Partial<CharacterFields> = {}) {
         Object.assign(this, fields);
     }
 

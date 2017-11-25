@@ -12,6 +12,7 @@ export default function SkillsTable({character}: SkillsTableProps) {
         <table>
             <tbody>
                 <SkillsTableRow character={character} skillState={character.skills.acrobatics}/>
+                <SkillsTableRow character={character} skillState={character.skills.other}/>
             </tbody>
         </table>
     )

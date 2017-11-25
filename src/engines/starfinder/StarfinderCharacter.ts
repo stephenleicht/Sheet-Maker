@@ -1,7 +1,10 @@
 import { Model, Field } from 'ghoti';
 import Character, {CharacterFields} from '../common/Character';
 import StarfinderSkills from './skills/StarfinderSkills';
-
+import LashuntaRace, { LashuntaSubspeciesType } from './races/Lashunta';
+import { StarfinderRaceName } from './races/StarfinderRaceName';
+import BaseStarfinderRace from './races/BaseStarfinderRace';
+import RaceChooser from './components/RaceChooser';
 
 
 export interface StarfinderCharacterFields extends CharacterFields {
@@ -17,13 +20,41 @@ export default class StarfinderCharacter extends Character  implements Starfinde
     @Field()
     public skills: StarfinderSkills
 
-    constructor(options: StarfinderCharacterFields) {
-        const {staminaPoints, skills, ...rest}  = options;
+    @Field({
+        Component: RaceChooser
+    })
+    public race: BaseStarfinderRace;
+
+
+    constructor(options?: Partial<StarfinderCharacterFields>) {
+        const {
+            staminaPoints = 0,
+            skills = new StarfinderSkills(), 
+            ...rest
+        }  = options || {};
+
         super(rest);
 
         Object.assign(this, {
            staminaPoints,
            skills,
         });
+
+        const race = new LashuntaRace();
+        race.subspecies = LashuntaSubspeciesType.Korasha;
+
+        this.race = race;
+    }
+
+    getSomething() {
+        if(this.race.raceName === StarfinderRaceName.Lashunta) {
+            const lashunta = this.race as LashuntaRace;
+
+            if(lashunta.subspecies === LashuntaSubspeciesType.Korasha) {
+                return 'korasha'
+            }
+        } 
+        
+        return 'Other';
     }
 }
