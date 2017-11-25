@@ -18,7 +18,6 @@
     "noUnusedLocals": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "preserveSymlinks": true,
     "baseUrl": "./src",
     "paths": {
       "ghoti": ["../../ghoti/*"]
