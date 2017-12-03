@@ -1,5 +1,7 @@
 import {Field, Model} from 'ghoti';
 import { StarfinderRaceName } from './StarfinderRaceName';
+import { EffectProvider } from '../../common/EffectProvider';
+import { Effect } from '../../common/Effect';
 
 const raceValues = Object
                     .entries(StarfinderRaceName)
@@ -9,7 +11,7 @@ const raceValues = Object
                     }, {});
 
 @Model()
-export default class BaseStarfinderRace {
+export default abstract class BaseStarfinderRace implements EffectProvider{
     @Field({
         possibleValues: raceValues
     })
@@ -18,4 +20,6 @@ export default class BaseStarfinderRace {
     constructor(raceName: StarfinderRaceName) {
         this.raceName = raceName;
     }
+
+    public abstract getEffects(): Effect[];
 }

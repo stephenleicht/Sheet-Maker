@@ -6,6 +6,8 @@ import { StarfinderRaceName } from './races/StarfinderRaceName';
 import BaseStarfinderRace from './races/BaseStarfinderRace';
 import RaceChooser from './components/RaceChooser';
 
+import { Effect } from '../common/Effect';
+
 
 export interface StarfinderCharacterFields extends CharacterFields {
     staminaPoints: number;
@@ -56,5 +58,14 @@ export default class StarfinderCharacter extends Character  implements Starfinde
         } 
         
         return 'Other';
+    }
+
+    public getActiveEffects(): Effect[] {
+        const baseEffects = super.getActiveEffects();
+
+        return [
+            ...baseEffects,
+            ...this.race.getEffects()
+        ]
     }
 }

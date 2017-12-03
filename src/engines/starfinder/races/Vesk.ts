@@ -10,4 +10,8 @@ export default class VeskRace extends BaseStarfinderRace implements VeskRaceInte
     constructor() {
         super(StarfinderRaceName.Vesk);
     }
+
+    public getEffects() {
+        return [];
+    }
 }

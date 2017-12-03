@@ -1,7 +1,9 @@
 import { Field } from 'ghoti';
 import { AbilityScoreType } from './AbilityScoreType';
+import { Effect } from './Effect';
 
 import calculateAbilityScoreModifier from '../../utilities/abilityScoreModifierCalculator';
+import { EffectType } from './EffectType';
 
 export interface CharacterFields {
     playerName: string;
@@ -9,7 +11,27 @@ export interface CharacterFields {
     totalHitPoints: number;
 }
 
+interface CharacterState {
+    bonuses: {
+        [fieldName: string]: {
+            untyped: {
+                active: Effect[],
+                value: number,
+            },
+            typed: {
+                [subtype: string]: {
+                    active: Effect,
+                    inactive: Effect[],
+                    value: number,
+                }
+            }
+        }
+    },
+}
+
 export default class Character implements CharacterFields {
+    public state: CharacterState;
+
     @Field()
     public playerName: string;
     
@@ -69,4 +91,53 @@ export default class Character implements CharacterFields {
         return calculateAbilityScoreModifier(this[type]);
     }
 
+    public computeCharacterState() {
+        const activeEffects = this.getActiveEffects();
+
+        const newState: CharacterState = activeEffects.reduce((agg, effect) => {
+            if(effect.type === EffectType.Bonus) {
+                agg.bonuses[effect.key] = agg.bonuses[effect.key] || {
+                    typed: {},
+                    untyped: {
+                        active: [],
+                        value: 0
+                    }
+                };
+
+                if(!effect.subtype) {
+                    agg.bonuses[effect.key].untyped = agg.bonuses[effect.key].untyped;
+                    agg.bonuses[effect.key].untyped.active.push(effect);
+                    agg.bonuses[effect.key].untyped.value += effect.value;
+                }
+                else {
+                    agg.bonuses[effect.key].typed[effect.subtype] = agg.bonuses[effect.key].typed[effect.subtype] || {
+                        inactive: []
+                    };
+
+                    const existingActiveEffect = agg.bonuses[effect.key].typed[effect.subtype].active
+                    if(!existingActiveEffect || existingActiveEffect.value < effect.value) {
+                        agg.bonuses[effect.key].typed[effect.subtype].active = effect;
+                        agg.bonuses[effect.key].typed[effect.subtype].value = effect.value;
+
+                        if(existingActiveEffect) {
+                            agg.bonuses[effect.key].typed[effect.subtype].inactive.push(existingActiveEffect);
+                        }
+                    }
+                    else {
+                        agg.bonuses[effect.key].typed[effect.subtype].inactive.push(effect);
+                    }
+                }
+            }
+
+            return agg;
+        }, {
+            bonuses: {}
+        } as CharacterState)
+
+        this.state = newState;
+    }
+
+    public getActiveEffects(): Effect[] {
+        return [];
+    }
 }
