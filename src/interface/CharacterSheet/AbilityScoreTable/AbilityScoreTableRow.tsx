@@ -9,9 +9,10 @@ export interface AbilityScoreTableRowProps {
     label: string;
     score: number,
     modifier: number,
+    scoreBonus: any
 }
 
-export default function AbilityScoreTableRow({ score, modifier, abbreviation, label }: AbilityScoreTableRowProps) {
+export default function AbilityScoreTableRow({ score, modifier, abbreviation, label, scoreBonus }: AbilityScoreTableRowProps) {
     return (
         <tr>
             <td className={styles.labelCell}>
@@ -23,6 +24,11 @@ export default function AbilityScoreTableRow({ score, modifier, abbreviation, la
             <td className={styles.infoCell}>
                 {modifier > 0 ? '+' : ''}{modifier}
             </td>
+            {scoreBonus &&
+                <td className={styles.infoCell}>
+                    {scoreBonus.value}
+                </td>
+            }
         </tr>
     );
 }

@@ -35,6 +35,16 @@ export default class CharacterSheet extends React.Component<{}, CharacterSheetSt
         });
     }
 
+    componentDidUpdate() {
+        if(this.state.value && !this.state.value.state) {
+            this.state.value.computeCharacterState();
+            // Set state because we are mutating the character object to keep it encapsulated
+            this.setState({
+                value: this.state.value
+            })
+        }
+    }
+
     render() {
         const { value } = this.state;
 
@@ -56,7 +66,7 @@ export default class CharacterSheet extends React.Component<{}, CharacterSheetSt
                 <SectionHeading>
                     Ability Scores
                 </SectionHeading>
-                <AbilityScoreTable value={value} />
+                <AbilityScoreTable character={value} />
                 <SectionHeading>
                     Skills
                 </SectionHeading>
