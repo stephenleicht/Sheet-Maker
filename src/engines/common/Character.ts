@@ -3,7 +3,7 @@ import { AbilityScoreType } from './AbilityScoreType';
 import { Effect } from './Effect';
 
 import calculateAbilityScoreModifier from '../../utilities/abilityScoreModifierCalculator';
-// import { EffectType } from './EffectType';
+import { EffectType } from './EffectType';
 import {EffectKey} from './EffectKey';
 
 export interface CharacterFields {
@@ -31,6 +31,31 @@ interface CharacterState {
         bonus: EffectState,
         penalty: EffectState,
         value: number,
+    }
+}
+
+function createDefaultEffectState() {
+    return {
+        bonus: {
+            typed: {
+                value: 0
+            },
+            untyped: {
+                active: [],
+                value: 0
+            },
+            value: 0
+        },
+        penalty: {
+            typed: {
+                value: 0
+            },
+            untyped: {
+                active: [],
+                value: 0
+            },
+            value: 0
+        }
     }
 }
 
@@ -132,28 +157,7 @@ export default class Character implements CharacterFields {
         const activeEffects = this.getActiveEffects();
 
         const newState: CharacterState = activeEffects.reduce((agg, effect) => {
-            agg[effect.key] = agg[effect.key] || {
-                bonus: {
-                    typed: {
-                        value: 0
-                    },
-                    untyped: {
-                        active: [],
-                        value: 0
-                    },
-                    value: 0
-                },
-                penalty: {
-                    typed: {
-                        value: 0
-                    },
-                    untyped: {
-                        active: [],
-                        value: 0
-                    },
-                    value: 0
-                }
-            }
+            agg[effect.key] = agg[effect.key] || createDefaultEffectState();
 
             if(!effect.subtype) {
                 agg[effect.key][effect.type].untyped = agg[effect.key][effect.type].untyped;
@@ -167,7 +171,10 @@ export default class Character implements CharacterFields {
                 };
 
                 const existingActiveEffect = agg[effect.key][effect.type].typed[effect.subtype].active
-                if(!existingActiveEffect || existingActiveEffect.value < effect.value) {
+                if(!existingActiveEffect ||
+                    (effect.type === EffectType.Bonus && existingActiveEffect.value < effect.value) ||
+                    (effect.type === EffectType.Penalty && existingActiveEffect.value > effect.value)
+                ) {
                     agg[effect.key][effect.type].typed[effect.subtype].active = effect;
                     agg[effect.key][effect.type].typed[effect.subtype].value = effect.value;
                     agg[effect.key][effect.type].value += effect.value;
