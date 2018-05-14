@@ -1,3 +1,5 @@
+import { Model, Field } from 'ghoti';
+
 import BaseStarfinderRace from "./BaseStarfinderRace";
 import { StarfinderRaceName } from "./StarfinderRaceName";
 
@@ -14,7 +16,9 @@ export interface LashuntaRaceInterface {
     subspecies: LashuntaSubspeciesType
 }
 
+@Model()
 export default class LashuntaRace extends BaseStarfinderRace implements LashuntaRaceInterface {
+    @Field()
     public subspecies: LashuntaSubspeciesType
 
     constructor() {

@@ -1,4 +1,4 @@
-import { Field } from 'ghoti';
+import { Field, Model } from 'ghoti';
 import { AbilityScoreType } from './AbilityScoreType';
 import { Effect } from './Effect';
 
@@ -59,6 +59,7 @@ function createDefaultEffectState() {
     }
 }
 
+@Model()
 export default class Character implements CharacterFields {
     public state: CharacterState;
 

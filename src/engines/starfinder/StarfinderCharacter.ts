@@ -4,11 +4,11 @@ import StarfinderSkills from './skills/StarfinderSkills';
 import LashuntaRace, { LashuntaSubspeciesType } from './races/Lashunta';
 import { StarfinderRaceName } from './races/StarfinderRaceName';
 import BaseStarfinderRace from './races/BaseStarfinderRace';
-import RaceChooser from './components/RaceChooser';
 
 import Feat from './feats/Feat';
 
 import { Effect } from '../common/Effect';
+import VeskRace from './races/Vesk';
 
 
 export interface StarfinderCharacterFields extends CharacterFields {
@@ -25,7 +25,10 @@ export default class StarfinderCharacter extends Character  implements Starfinde
     public skills: StarfinderSkills
 
     @Field({
-        Component: RaceChooser
+        taggedUnion: Field.taggedUnion('raceName', {
+            [StarfinderRaceName.Lashunta]: LashuntaRace,
+            [StarfinderRaceName.Vesk]: VeskRace,
+        })
     })
     public race: BaseStarfinderRace;
 
