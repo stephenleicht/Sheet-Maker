@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { FormElement, FormElementProps, Select } from 'ghoti/dist/forms';
+import { FormElement, FormElementProps, Select } from 'ghoti';
 
 class RaceChooser extends React.Component<FormElementProps, {}> {
     static defaultProps = {
         value: {
             raceName: 'lashunta'
         },
-        onChange: () => {}
+        onChange: () => { }
     };
 
     onFieldChange = (fieldName: string, newValue: any) => {
@@ -22,15 +22,17 @@ class RaceChooser extends React.Component<FormElementProps, {}> {
         return (
             <div>
                 Subspecies
-                <Select
-                    name="subspecies"
-                    onChange={(newValue: any) => this.onFieldChange('subspecies', newValue)}
-                    value={this.props.value.subspecies}
-                    options={[
-                        { key: 'damaya', displayValue: 'Damaya' },
-                        { key: 'korasha', displayValue: 'Korasha' }
-                    ]}
-                />
+                <div>
+                    <Select
+                        name="subspecies"
+                        onChange={(newValue: any) => this.onFieldChange('subspecies', newValue)}
+                        value={this.props.value.subspecies}
+                        options={[
+                            { key: 'damaya', displayValue: 'Damaya' },
+                            { key: 'korasha', displayValue: 'Korasha' }
+                        ]}
+                    />
+                </div>
             </div>
         )
     }

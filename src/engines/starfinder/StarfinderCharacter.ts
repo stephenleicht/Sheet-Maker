@@ -6,6 +6,8 @@ import { StarfinderRaceName } from './races/StarfinderRaceName';
 import BaseStarfinderRace from './races/BaseStarfinderRace';
 import RaceChooser from './components/RaceChooser';
 
+import Feat from './feats/Feat';
+
 import { Effect } from '../common/Effect';
 
 
@@ -26,6 +28,11 @@ export default class StarfinderCharacter extends Character  implements Starfinde
         Component: RaceChooser
     })
     public race: BaseStarfinderRace;
+
+    @Field({
+        arrayOf: Feat
+    })
+    public feats: Feat[]
 
 
     constructor(options?: Partial<StarfinderCharacterFields>) {

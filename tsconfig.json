@@ -22,10 +22,10 @@
     "paths": {
       "ghoti": ["../../ghoti/*"]
     },
-    "types": []
   },
   "exclude": [
-    "node_modules",
+    "node_modules/!(ghoti)",
+    "node_modules/ghoti/node_modules",
     "build",
     "scripts",
     "acceptance-tests",
