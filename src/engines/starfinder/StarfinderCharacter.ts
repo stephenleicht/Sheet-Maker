@@ -4,6 +4,7 @@ import StarfinderSkills from './skills/StarfinderSkills';
 import LashuntaRace, { LashuntaSubspeciesType } from './races/Lashunta';
 import { StarfinderRaceName } from './races/StarfinderRaceName';
 import BaseStarfinderRace from './races/BaseStarfinderRace';
+import StarfinderEquipment from './equipment/StarfinderEquipment';
 
 import Feat from './feats/Feat';
 
@@ -36,6 +37,9 @@ export default class StarfinderCharacter extends Character  implements Starfinde
         arrayOf: Feat
     })
     public feats: Feat[]
+
+    @Field()
+    public equipment: StarfinderEquipment;
 
 
     constructor(options?: Partial<StarfinderCharacterFields>) {
