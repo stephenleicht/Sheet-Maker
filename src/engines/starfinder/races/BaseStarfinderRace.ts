@@ -8,7 +8,7 @@ const raceValues = Object
                     .reduce((agg, [displayValue, key]) => {
                         agg[key] = displayValue;
                         return agg;
-                    }, {});
+                    }, {} as {[key: string]: any});
 
 @Model()
 export default abstract class BaseStarfinderRace implements EffectProvider{

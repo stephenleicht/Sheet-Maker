@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import StarfinderCharacter from '../../../engines/starfinder/StarfinderCharacter';
+import StarfinderCharacter from '../../../../engines/starfinder/StarfinderCharacter';
 import SkillsTableRow from './SkillsTableRow';
 
 export interface SkillsTableProps {

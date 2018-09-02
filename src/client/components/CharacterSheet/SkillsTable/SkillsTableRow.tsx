@@ -1,6 +1,6 @@
 import * as React from 'react';
-import SkillState from '../../../engines/starfinder/skills/SkillState';
-import StarfinderCharacter from '../../../engines/starfinder/StarfinderCharacter';
+import SkillState from '../../../../engines/starfinder/skills/SkillState';
+import StarfinderCharacter from '../../../../engines/starfinder/StarfinderCharacter';
 
 export interface SkillsTableRowProps {
     character: StarfinderCharacter,

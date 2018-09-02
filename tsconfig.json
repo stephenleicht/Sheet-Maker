@@ -1,36 +1,23 @@
 {
   "compilerOptions": {
-    "outDir": "build/dist",
-    "module": "commonjs",
-    "target": "es6",
-    "lib": ["es2017", "dom"],
     "sourceMap": true,
-    "allowJs": true,
-    "jsx": "react",
+    "declaration": true,
+    "strict": true,
+    "module": "commonjs",
     "moduleResolution": "node",
-    "rootDirs": ["src", "config"],
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
+    "target": "es2018",
+    "jsx": "react",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "pretty": true,
     "baseUrl": "./src",
-    "paths": {
-      "ghoti": ["../../ghoti/*"]
-    },
+    "lib": [
+      "dom",
+      "es2017"
+    ]
   },
-  "exclude": [
-    "node_modules/!(ghoti)",
-    "node_modules/ghoti/node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts"
+  "include": [
+    "./src/**/*",
   ]
 }

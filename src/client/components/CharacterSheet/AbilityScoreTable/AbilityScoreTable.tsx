@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import * as styles from './AbilityScoreTable.css';
-import StarfinderCharacter from '../../../engines/starfinder/StarfinderCharacter';
-import {EffectKey} from '../../../engines/common/EffectKey';
+import StarfinderCharacter from '../../../../engines/starfinder/StarfinderCharacter';
+import {EffectKey} from '../../../../engines/common/EffectKey';
 
 import AbilityScoreTableRow from './AbilityScoreTableRow';
 
