@@ -11,7 +11,7 @@ export default class StarfinderEquipment {
     UPB: number;
 
     @Field({
-        arrayOf: WeaponTaggedUnion
+        type: Field.arrayOf(WeaponTaggedUnion)
     })
     weapons: Weapon[];
 

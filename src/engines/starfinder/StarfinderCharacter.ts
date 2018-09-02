@@ -3,14 +3,12 @@ import Character, {CharacterFields} from '../common/Character';
 import StarfinderSkills from './skills/StarfinderSkills';
 import LashuntaRace, { LashuntaSubspeciesType } from './races/Lashunta';
 import { StarfinderRaceName } from './races/StarfinderRaceName';
-import BaseStarfinderRace from './races/BaseStarfinderRace';
+import { StarfinderRace, StarfinderRaceTaggedUnion } from './races/StarfinderRace';
 import StarfinderEquipment from './equipment/StarfinderEquipment';
 
 import Feat from './feats/Feat';
 
 import { Effect } from '../common/Effect';
-import VeskRace from './races/Vesk';
-
 
 export interface StarfinderCharacterFields extends CharacterFields {
     staminaPoints: number;
@@ -26,15 +24,12 @@ export default class StarfinderCharacter extends Character  implements Starfinde
     public skills: StarfinderSkills
 
     @Field({
-        taggedUnion: Field.taggedUnion('raceName', {
-            [StarfinderRaceName.Lashunta]: LashuntaRace,
-            [StarfinderRaceName.Vesk]: VeskRace,
-        })
+        type: StarfinderRaceTaggedUnion
     })
-    public race: BaseStarfinderRace;
+    public race: StarfinderRace;
 
     @Field({
-        arrayOf: Feat
+        type: Field.arrayOf(Feat)
     })
     public feats: Feat[]
 
@@ -55,11 +50,6 @@ export default class StarfinderCharacter extends Character  implements Starfinde
            staminaPoints,
            skills,
         });
-
-        const race = new LashuntaRace();
-        race.subspecies = LashuntaSubspeciesType.Korasha;
-
-        this.race = race;
     }
 
     getSomething() {

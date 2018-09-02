@@ -16,12 +16,15 @@
     "@types/react-dom": "^16.0.7",
     "@types/webpack": "^4.4.11",
     "@types/webpack-env": "^1.13.6",
+    "css-loader": "^1.0.0",
     "neutrino": "^8.3.0",
+    "style-loader": "^0.23.0",
     "ts-loader": "^3.0.0",
-    "typescript": "^3.0.3"
+    "typescript": "^3.0.3",
+    "typings-for-css-modules-loader": "^1.7.0"
   },
   "dependencies": {
-    "ghoti": "^0.2.0",
+    "ghoti": "0.3.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"
   }

@@ -8,7 +8,8 @@ import { CriticalEffectType } from './CriticalEffectType';
 @Model()
 export class BaseWeapon {
     @Field({
-        enumOf: WeaponCategory
+        required: true,
+        type: Field.enumOf(WeaponCategory)
     })
     category: WeaponCategory = WeaponCategory.Uncategorized
 
@@ -28,7 +29,7 @@ export class BaseWeapon {
     bulk: number;
 
     @Field({
-        enumOf: CriticalEffectType
+        type: Field.enumOf(CriticalEffectType)
     })
     criticalEffectType: CriticalEffectType
 

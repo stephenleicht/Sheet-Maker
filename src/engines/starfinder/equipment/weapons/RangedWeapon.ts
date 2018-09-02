@@ -15,7 +15,7 @@ export default class RangedWeapon extends BaseWeapon {
     ammoCapacity: number
 
     @Field({
-        enumOf: AmmoType
+        type: Field.enumOf(AmmoType)
     })
     ammoType: AmmoType
 

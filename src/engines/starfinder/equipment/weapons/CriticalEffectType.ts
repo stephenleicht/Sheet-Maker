@@ -1,5 +1,4 @@
 export enum CriticalEffectType {
-    None = 'none',
     Arc = 'arc',
     Bleed = 'bleed',
     Burn = 'burn',

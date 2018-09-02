@@ -3,23 +3,20 @@ import { StarfinderRaceName } from './StarfinderRaceName';
 import { EffectProvider } from '../../common/EffectProvider';
 import { Effect } from '../../common/Effect';
 
-const raceValues = Object
-                    .entries(StarfinderRaceName)
-                    .reduce((agg, [displayValue, key]) => {
-                        agg[key] = displayValue;
-                        return agg;
-                    }, {} as {[key: string]: any});
 
 @Model()
-export default abstract class BaseStarfinderRace implements EffectProvider{
-    @Field({
-        possibleValues: raceValues
-    })
+export default class BaseStarfinderRace implements EffectProvider{
     public raceName: StarfinderRaceName;
 
-    constructor(raceName: StarfinderRaceName) {
+    constructor(raceName: StarfinderRaceName = StarfinderRaceName.Lashunta) {
         this.raceName = raceName;
     }
 
-    public abstract getEffects(): Effect[];
+    public getEffects(): Effect[] {
+        return []
+    }
+
+    toString() {
+        return this.raceName;
+    }
 }
