@@ -18,7 +18,9 @@ export interface LashuntaRaceInterface {
 
 @Model()
 export default class LashuntaRace extends BaseStarfinderRace implements LashuntaRaceInterface {
-    @Field()
+    @Field({
+        type: Field.enumOf(LashuntaSubspeciesType)
+    })
     public subspecies: LashuntaSubspeciesType
 
     constructor() {
@@ -27,6 +29,18 @@ export default class LashuntaRace extends BaseStarfinderRace implements Lashunta
 
     public getEffects(): Effect[] {
         return [
+            {
+                type: EffectType.Bonus,
+                subtype: 'racial',
+                key: EffectKey.Charisma,
+                value: 1
+            },
+            {
+                type: EffectType.Bonus,
+                key: EffectKey.Charisma,
+                value: 1
+            },
+
             {
                 type: EffectType.Bonus,
                 subtype: 'racial',

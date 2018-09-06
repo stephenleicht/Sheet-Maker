@@ -46,9 +46,14 @@ export default class StarfinderCharacter extends Character  implements Starfinde
 
         super(rest);
 
+        const race = new LashuntaRace();
+        race.subspecies = LashuntaSubspeciesType.Korasha;
+
+
         Object.assign(this, {
            staminaPoints,
            skills,
+           race: race
         });
     }
 

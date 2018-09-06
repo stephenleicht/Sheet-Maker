@@ -1,2 +1,1 @@
-export const appLogo: string;
-export const appHeader: string;
+export const menu: string;

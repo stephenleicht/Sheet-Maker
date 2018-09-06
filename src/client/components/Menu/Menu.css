@@ -1,0 +1,13 @@
+.wrapper {
+    border: 1px solid black;
+    display: flex;
+
+}
+
+.tabBar {
+    border: 1px solid black;
+}
+
+.content {
+    border: 1px solid black;
+}

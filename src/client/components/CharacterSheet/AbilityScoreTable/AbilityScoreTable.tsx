@@ -18,7 +18,7 @@ export default function AbilityScoreTable({character}: AbilityScoreTableProps) {
                 <td/>
                 <td>Score</td>
                 <td>Modifier</td>
-                <td>Upgraded Score</td>
+                <td>Bonus/Penalty</td>
                 <td>Upgraded Modifier</td>
             </tr>
         </thead>

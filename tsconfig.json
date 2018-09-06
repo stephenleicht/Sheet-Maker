@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./build",
+    "outDir": "./build/server",
     "sourceMap": true,
     "declaration": true,
     "strict": true,
@@ -21,4 +21,7 @@
   "include": [
     "./src/**/*",
   ],
+  "exclude": [
+    "./build"
+  ]
 }

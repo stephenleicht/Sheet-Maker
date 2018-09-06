@@ -90,6 +90,11 @@ export default class Character implements CharacterFields {
     @Field()
     public baseCharisma: number;
 
+    @Field({
+        type: Field.arrayOf(String)
+    })
+    public languages: string[]
+
     public get strengthModifier() {
         return calculateAbilityScoreModifier(this.strength);
     }

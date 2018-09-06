@@ -1,14 +1,20 @@
-const tsConfig = require('./config/typescript.neutrino');
-const StartServerPlugin = require('start-server-webpack-plugin');
-
 module.exports = {
   options: {
-    index: 'server/server',
+    output: './build/client',
+    mains: {
+      index: 'client/index'
+    }
   },
   use: [
-    '@neutrinojs/node',
     '@neutrinojs/react',
-    tsConfig,
+    './config/typescript.neutrino.js',
     './config/styles.neutrino.js',
+    // ['@neutrinojs/copy', {
+    //   patterns: [
+    //     {from: 'src/extension/manifest.json', to: 'extension'}
+    //   ]
+    // }],
+
+    './config/devServer.neutrino.js'
   ]
 };

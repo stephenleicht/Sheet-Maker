@@ -24,6 +24,7 @@
     "typings-for-css-modules-loader": "^1.7.0"
   },
   "dependencies": {
+    "@neutrinojs/copy": "^8.3.0",
     "ghoti": "0.3.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"

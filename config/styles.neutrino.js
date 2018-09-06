@@ -1,20 +1,22 @@
-const path = require('path');
+const { WatchIgnorePlugin } = require('webpack');
 
 module.exports = (neutrino) => {
-    neutrino.config.module.rule('style').delete();
-    neutrino.config.module.rule('style-modules').delete('style-modules');
-    const rule = neutrino.config.module
-        .rule('style')
+    // TODO switch to change test to /\.(global.css)$/ and exclude that from style-modules
+    neutrino.config.module.rules.delete('style');
 
-    rule.use('style')
-        .loader(require.resolve('style-loader'));
-
-    rule.use('css')
-        .loader(require.resolve('css-loader'))
+    // Change modules to have the .css file ending instead of the default .module.css, because I'm picky.
+    neutrino.config.module
+        .rule('style-modules')
+        .test(/\.(css)$/)
+        .use('css-modules')
+        .loader('typings-for-css-modules-loader')
         .options({
-            modules: true,
             importLoaders: 0,
-            localIdentName: '[name]__[local]___[hash:base64:5]'
-        })
+            modules: true,
+            namedExport: true,
+            localIdentName: '[path][name]__[local]--[hash:base64:5]'
+        });
 
+    neutrino.config.plugin('watch-ignore')
+    .use(WatchIgnorePlugin, [[/\.css\.d\.ts$/]])
 }
