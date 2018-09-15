@@ -1,9 +1,15 @@
 :global body, :global html {
   font-size: 16px;
   font-family: sans-serif;
+  background-color: #ddd;
 }
 
 .menu {
   position: absolute;
   right: 10px;
+}
+
+.container {
+  width: 300px;
+  padding: 30px;
 }

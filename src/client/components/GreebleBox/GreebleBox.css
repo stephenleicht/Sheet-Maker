@@ -1,0 +1,63 @@
+.wrapper {
+    position: relative;
+}
+
+.mask {
+    position: absolute;
+    width:100%;
+    height:100%;
+}
+
+.mask mask {
+    fill: #fff;
+}
+
+.cutout {
+    fill: #000;
+}
+
+.cutout rect {
+    transform: rotate(45deg);
+}
+
+
+.background {
+    fill: #fff;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.cutoutTopRight {
+    transform-origin: 100% 0 0;
+    x: 100%;
+}
+
+.cutoutBottomRight {
+    transform-origin: 100% 100% 0;
+    x: 100%;
+    y: 100%;
+}
+
+.cutoutBottomLeft {
+    transform-origin: 0 100% 0;
+    y: 100%;
+}
+
+.borders line{
+    transform-origin: 50% 50%;
+}
+
+.borderTopRight{
+    transform: scale(-1, 1);
+}
+
+.borderBottomRight {
+    transform: scale(-1);
+}
+
+.borderBottomLeft{
+    transform: scale(1, -1);
+}

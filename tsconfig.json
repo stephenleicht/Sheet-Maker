@@ -20,6 +20,7 @@
   },
   "include": [
     "./src/**/*",
+    "./typings/**/*.d.ts"
   ],
   "exclude": [
     "./build"
