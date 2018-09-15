@@ -4,7 +4,14 @@ import * as styles from './GreebleBox.css';
 
 export interface GreebleBoxProps {
     children: React.ReactNode,
-    size?: number,
+    cutSize: number,
+    strokeWidth: number,
+    corners: {
+        tl?: boolean,
+        tr?: boolean,
+        br?: boolean,
+        bl?: boolean,
+    }
 }
 
 interface GreebleBoxState {
@@ -12,6 +19,17 @@ interface GreebleBoxState {
 }
 
 export default class GreebleBox extends React.Component<GreebleBoxProps, GreebleBoxState> {
+    static defaultProps = {
+        cutSize: 20,
+        strokeWidth: 2,
+        corners: {
+            tl: true,
+            tr: true,
+            bl: true,
+            br: true
+        }
+    }
+
     contentRef: React.RefObject<HTMLDivElement>;
     observer: ResizeObserver
 
@@ -36,43 +54,54 @@ export default class GreebleBox extends React.Component<GreebleBoxProps, Greeble
 
     render() {
         const { rect } = this.state;
-        const { children, size = 30 } = this.props;
-        const strokeWidth = 1;
-        
-        const lineOffset = Math.trunc(size / Math.SQRT2);
+        const { children, cutSize, strokeWidth, corners } = this.props;
 
-        const padding = lineOffset;
+        const cornerOffset = Math.trunc(cutSize / Math.SQRT2);
+        const strokeDiameter = strokeWidth / 2;
+
+        const padding = (cornerOffset / 2) + strokeDiameter;
         let pathPoints;
         let viewBox;
         if (rect) {
-            const paddedWidth = rect.width + padding * 2;
-            const paddedHeight = rect.height + padding * 2;
+            const { width, height } = rect;
 
-            viewBox = `-1 -1 ${Math.trunc(paddedWidth) + 3} ${Math.trunc(paddedHeight) + 3}`
+            const topEdge = strokeDiameter;
+            const leftEdge = strokeDiameter;
+            const rightEdge = width - strokeDiameter;
+            const bottomEdge = height - strokeDiameter;
+
+            viewBox = `0 0 ${width} ${height}`
 
             pathPoints = [
                 //Top left
-                `0,${lineOffset} ${lineOffset},0`,
+                corners.tl ?
+                    `${leftEdge},${topEdge + cornerOffset} ${leftEdge + cornerOffset},${topEdge}` :
+                    `${leftEdge},${topEdge}`,
 
                 // Top right
-                `${paddedWidth - lineOffset},0 ${paddedWidth},${lineOffset}`,
+                corners.tr ?
+                    `${rightEdge - cornerOffset},${topEdge} ${rightEdge},${topEdge + cornerOffset}` :
+                    `${rightEdge},${topEdge}`,
 
                 //Bottom right
-                `${paddedWidth},${paddedHeight - lineOffset} ${paddedWidth - lineOffset},${paddedHeight}`,
+                corners.br ?
+                    `${rightEdge},${bottomEdge - cornerOffset} ${rightEdge - cornerOffset},${bottomEdge}` :
+                    `${rightEdge},${bottomEdge}`,
 
                 //Bottom left
-                `${lineOffset},${paddedHeight} 0,${paddedHeight - lineOffset}`
+                corners.bl ?
+                    `${leftEdge + cornerOffset},${bottomEdge} ${leftEdge},${bottomEdge - cornerOffset}` :
+                    `${leftEdge},${bottomEdge}`
             ].join(' ');
         }
 
 
         return (
-            <div className={styles.wrapper}>
-                <svg className={styles.mask} xmlns="http://www.w3.org/2000/svg" viewBox={viewBox} shapeRendering="crispEdges">
+            <div className={styles.wrapper} ref={this.contentRef}>
+                <svg className={styles.mask} xmlns="http://www.w3.org/2000/svg" viewBox={viewBox} shapeRendering="auto">
                     <polygon className={styles.background} points={pathPoints} stroke="#000" strokeWidth={strokeWidth} />
                 </svg>
                 <div
-                    ref={this.contentRef}
                     className={styles.content}
                     style={{ padding: `${padding}px` }}
                 >

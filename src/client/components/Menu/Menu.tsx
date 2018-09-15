@@ -29,20 +29,40 @@ export default class Menu extends React.Component<{}, MenuState> {
         return (
             <div className={styles.wrapper}>
                 <Tabs activeTab={this.state.activeTab} onTabChange={this.onTabChange}>
-                    <GreebleBox size={15}>
-                        <TabBody name="character">
-                            <h4>Tab 1</h4>
-                        </TabBody>
-                        <TabBody name="skills">
-                            <h4>Tab 2 kjalsdflkjas dflkajsdf lskjsdf lsdjf lksfjlsakjf sadf</h4>
-                        </TabBody>
-                    </GreebleBox>
-                    <GreebleBox>
+                    {this.state.activeTab &&
+                        <div className={styles.contentWrapper}>
+                            <GreebleBox cutSize={20} corners={{ tl: true, bl: true }}>
+                                <TabBody name="character">
+                                    <div>
+                                        <strong>Character</strong>
+                                    </div>
+                                </TabBody>
+                                <TabBody name="skills">
+                                    <div>
+                                        <strong>Tab 2 kjalsdflkjas dflkajsdf lskjsdf lsdjf lksfjlsakjf sadf</strong>
+                                    </div>
+                                </TabBody>
+                            </GreebleBox>
+                        </div>
+                    }
+                    <GreebleBox cutSize={16} corners={{ bl: true }}>
                         <Tab name="character">
                             Character
                         </Tab>
                         <Tab name="skills">
                             Skills
+                        </Tab>
+                        <Tab name="abilities">
+                            Abilities
+                        </Tab>
+                        <Tab name="equipment">
+                            Equipment
+                        </Tab>
+                        <Tab name="spells">
+                            Spells
+                        </Tab>
+                        <Tab name="etc">
+                            Etc
                         </Tab>
                     </GreebleBox>
                 </Tabs>
