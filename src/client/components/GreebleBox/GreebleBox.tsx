@@ -98,8 +98,8 @@ export default class GreebleBox extends React.Component<GreebleBoxProps, Greeble
 
         return (
             <div className={styles.wrapper} ref={this.contentRef}>
-                <svg className={styles.mask} xmlns="http://www.w3.org/2000/svg" viewBox={viewBox} shapeRendering="auto">
-                    <polygon className={styles.background} points={pathPoints} stroke="#000" strokeWidth={strokeWidth} />
+                <svg className={styles.svg} xmlns="http://www.w3.org/2000/svg" viewBox={viewBox}>
+                    <polygon className={styles.background} points={pathPoints} strokeWidth={strokeWidth} />
                 </svg>
                 <div
                     className={styles.content}

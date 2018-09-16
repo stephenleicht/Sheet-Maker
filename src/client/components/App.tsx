@@ -22,11 +22,13 @@ class App extends React.Component<{}, AppState> {
 
     return (
       <div className={styles.container}>
-        <button onClick={() => this.setState({smallText: !smallText})}>Change</button>
-        <GreebleBox cutSize={50} corners={{tr: true, br: true, tl: true, bl: true}} strokeWidth={3}>
-          {smallText ? 
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim.' :
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non elit eget arcu tempor semper in vitae tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean sed.'}
+        <button onClick={() => this.setState({ smallText: !smallText })}>Change</button>
+        <GreebleBox cutSize={50} corners={{ tr: true, br: false, tl:false, bl: true }} strokeWidth={3}>
+          <div style={{padding: '8px'}}>
+            {smallText ?
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim.' :
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non elit eget arcu tempor semper in vitae tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean sed.'}
+          </div>
         </GreebleBox>
         <Pane>
           <div className={styles.menu}>

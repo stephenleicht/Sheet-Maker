@@ -31,9 +31,9 @@ export default class Menu extends React.Component<{}, MenuState> {
                 <Tabs activeTab={this.state.activeTab} onTabChange={this.onTabChange}>
                     {this.state.activeTab &&
                         <div className={styles.contentWrapper}>
-                            <GreebleBox cutSize={20} corners={{ tl: true, bl: true }}>
+                            <GreebleBox cutSize={20} corners={{ tl: true, bl: true, br: true }}>
                                 <TabBody name="character">
-                                    <div>
+                                    <div style={{width: '200px', height: '300px', padding: '16px'}}>
                                         <strong>Character</strong>
                                     </div>
                                 </TabBody>
