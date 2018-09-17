@@ -1,0 +1,12 @@
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.tabBar {
+    border: 1px solid black;
+}
+
+.contentWrapper {
+    margin-right: -2px;
+}

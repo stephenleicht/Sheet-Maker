@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "d20plus1",
+    "version": "1.0",
+    "description": "d20+1 is an extension to enhance the roll20 playing experience.",
+    "permissions": [
+        "storage",
+        "declarativeContent",
+        "activeTab"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "page_action": {
+        "default_popup": "popup.html"
+    },
+
+
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

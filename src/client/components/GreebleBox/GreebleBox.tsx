@@ -47,6 +47,10 @@ export default class GreebleBox extends React.Component<GreebleBoxProps, Greeble
         }
     }
 
+    componentWillUnmount() {
+        this.observer.disconnect();
+    }
+
     onResize = (entries: ResizeObserverEntry[]) => {
         const entry = entries[0];
         this.setState({ rect: entry.contentRect })

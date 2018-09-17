@@ -24,7 +24,7 @@ export default class SkillState {
     }
 
     public getTotalModifier(character: StarfinderCharacter): number {
-        const baseModifier = this.miscMod + character.getAbilityScoreModifier(this.skill.abilityScore);
+        const baseModifier = this.miscMod; // + character.getAbilityScoreModifier(this.skill.abilityScore);
 
         if(this.isClassSkill && this.rank > 0) {
             return baseModifier + this.rank + 3;

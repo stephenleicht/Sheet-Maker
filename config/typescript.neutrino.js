@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = (neutrino) => {
     neutrino.config.resolve
         .extensions
@@ -10,4 +12,8 @@ module.exports = (neutrino) => {
             .use('ts-loader')
             .loader('ts-loader')
             .end()
+
+    // Add aliases to mimick typscripts module resolution
+    neutrino.config.resolve.alias
+    .set('engines', path.resolve(__dirname, '../src/engines'))
 }
