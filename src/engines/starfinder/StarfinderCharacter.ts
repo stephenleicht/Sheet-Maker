@@ -1,14 +1,13 @@
-import { Model, Field } from 'ghoti';
-import Character, {CharacterFields} from '../common/Character';
-import StarfinderSkills from './skills/StarfinderSkills';
-import LashuntaRace, { LashuntaSubspeciesType } from './races/Lashunta';
-import { StarfinderRaceName } from './races/StarfinderRaceName';
-import { StarfinderRace, StarfinderRaceTaggedUnion } from './races/StarfinderRace';
-import StarfinderEquipment from './equipment/StarfinderEquipment';
-
-import Feat from './feats/Feat';
-
+import { Field, Model } from 'ghoti';
+import Character, { CharacterFields } from '../common/Character';
 import { Effect } from '../common/Effect';
+import StarfinderEquipment from './equipment/StarfinderEquipment';
+import Feat from './feats/Feat';
+import LashuntaRace, { LashuntaSubspeciesType } from './races/Lashunta';
+import { StarfinderRace, StarfinderRaceTaggedUnion } from './races/StarfinderRace';
+import StarfinderSkills from './skills/StarfinderSkills';
+
+
 
 export interface StarfinderCharacterFields extends CharacterFields {
     staminaPoints: number;
@@ -55,18 +54,6 @@ export default class StarfinderCharacter extends Character  implements Starfinde
            skills,
            race: race
         });
-    }
-
-    getSomething() {
-        if(this.race.raceName === StarfinderRaceName.Lashunta) {
-            const lashunta = this.race as LashuntaRace;
-
-            if(lashunta.subspecies === LashuntaSubspeciesType.Korasha) {
-                return 'korasha'
-            }
-        } 
-        
-        return 'Other';
     }
 
     public getActiveEffects(): Effect[] {

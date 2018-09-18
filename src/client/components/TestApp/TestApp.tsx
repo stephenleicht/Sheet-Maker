@@ -1,43 +1,23 @@
 import * as React from 'react';
-
-import StarfinderCharacter from 'engines/starfinder/StarfinderCharacter';
-import { PlayState, computePlayStateEffects } from 'engines/common/PlayState';
-
-import Pane from '../Pane';
-import PlayMenu from '../PlayMenu'
 import GreebleBox from '../GreebleBox';
-
-import { getCharacterByID } from './TestAppActions';
-
+import PlayApp from '../PlayApp';
 import * as styles from './TestApp.css';
+
+
+
 
 interface TestAppState {
   smallText: boolean,
-  character: StarfinderCharacter | null
-  playState: PlayState | null
 }
 
 class TestApp extends React.Component<{}, TestAppState> {
   state: TestAppState = {
-    smallText: true,
-    character: null,
-    playState: null,
-  }
-
-  async componentDidMount() {
-    const character = await getCharacterByID('5a079da72552750c22ac7906');
-
-    this.setState({
-      character,
-      playState: {
-        effects: computePlayStateEffects(character)
-      }
-    });
+    smallText: true
   }
 
 
   render() {
-    const { smallText, playState, character } = this.state;
+    const { smallText } = this.state;
 
     return (
       <div className={styles.container}>
@@ -49,16 +29,20 @@ class TestApp extends React.Component<{}, TestAppState> {
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non elit eget arcu tempor semper in vitae tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean sed.'}
           </div>
         </GreebleBox>
-        <Pane>
-          <div className={styles.menu}>
-            {playState && character &&
-              <PlayMenu playState={playState} character={character} />
-            }
-          </div>
-        </Pane>
+        <Chat />
+        <PlayApp />
       </div>
     );
   }
 }
 
 export default TestApp;
+
+function Chat() {
+  return (
+    <div id="textchat-input" className={styles.chat}>
+      <textarea name="" style={{width: '100%', height: '200px'}} ></textarea>
+      <button>Submit</button>
+    </div>
+  )
+}

@@ -1,8 +1,8 @@
 export enum AbilityScoreType {
-    Str = 'strength',
-    Dex = 'dexterity',
-    Con = 'constitution',
-    Int = 'intelligence',
-    Wis = 'wisdom',
-    Cha = 'charisma'
+    Str = 'str',
+    Dex = 'dex',
+    Con = 'con',
+    Int = 'int',
+    Wis = 'wis',
+    Cha = 'cha'
 }

@@ -6,10 +6,23 @@
 
 .menu {
   position: absolute;
-  right: 0;
+  top: 120px;
+  right: 320px;
 }
 
 .container {
   width: 300px;
   padding: 30px;
+}
+
+.chat {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  background: #f9f9f9;
+  width: 320px;
+
+  border-left: 2px solid black;
 }
