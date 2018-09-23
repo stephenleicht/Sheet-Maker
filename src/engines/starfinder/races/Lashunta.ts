@@ -6,6 +6,7 @@ import { StarfinderRaceName } from "./StarfinderRaceName";
 import {Effect} from '../../common/Effect';
 import {EffectType}  from '../../common/EffectType';
 import {EffectKey} from '../../common/EffectKey';
+import { StarfinderSkillName } from '../skills/StarfinderSkills';
 
 export enum LashuntaSubspecies {
     Damaya = 'damaya',
@@ -21,6 +22,16 @@ export default class LashuntaRace extends BaseStarfinderRace {
         type: Field.enumOf(LashuntaSubspecies)
     })
     public subspecies: LashuntaSubspecies
+
+    @Field({
+        type: Field.enumOf(StarfinderSkillName)
+    })
+    public studentSkill1: StarfinderSkillName
+
+    @Field({
+        type: Field.enumOf(StarfinderSkillName)
+    })
+    public studentSkill2: StarfinderSkillName
 
     public getEffects(): Effect[] {
         return [
@@ -40,6 +51,19 @@ export default class LashuntaRace extends BaseStarfinderRace {
                 type: EffectType.Penalty,
                 subtype: 'racial',
                 key: this.subspecies === LashuntaSubspecies.Damaya ? EffectKey.Constitution : EffectKey.Wisdom,
+                value: 2
+            },
+
+            {
+                type: EffectType.Bonus,
+                subtype: 'racial',
+                key: `skills.${this.studentSkill1}.miscMod`,
+                value: 2
+            },
+            {
+                type: EffectType.Bonus,
+                subtype: 'racial',
+                key: `skills.${this.studentSkill2}.miscMod`,
                 value: 2
             }
         ]
