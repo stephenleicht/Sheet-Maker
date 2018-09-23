@@ -1,14 +1,9 @@
-import StarfinderCharacter, { StarfinderCharacterFields } from "engines/starfinder/StarfinderCharacter";
-import StarfinderSkills from "engines/starfinder/skills/StarfinderSkills";
-
+import {deserialize} from 'ghoti';
+import StarfinderCharacter from "engines/starfinder/StarfinderCharacter";
 
 export async function getCharacterByID(id: string): Promise<StarfinderCharacter> {
     const response = await fetch(`http://localhost:4000/api/models/starfindercharacters/${id}`)
-    const body: StarfinderCharacterFields = await response.json();
+    const body: any = await response.json();
 
-    body.skills = new StarfinderSkills();
-
-    body.skills.acrobatics.isClassSkill = true;
-
-    return new StarfinderCharacter(body);
+    return deserialize(StarfinderCharacter, body);
 }

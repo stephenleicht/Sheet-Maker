@@ -20,3 +20,8 @@ export default class AbilityScores {
     @Field()
     public cha: number;
 }
+
+export function calculateAbilityScoreModifier(abilityScore: number): number {
+    const centered = abilityScore - 10;
+    return Math.floor(centered / 2);
+}

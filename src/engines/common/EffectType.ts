@@ -1,4 +1,5 @@
 export enum EffectType {
     Bonus = 'bonus',
-    Penalty = 'penalty'
+    Penalty = 'penalty',
+    Set = 'set',
 }

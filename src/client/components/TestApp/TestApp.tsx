@@ -3,9 +3,6 @@ import GreebleBox from '../GreebleBox';
 import PlayApp from '../PlayApp';
 import * as styles from './TestApp.css';
 
-
-
-
 interface TestAppState {
   smallText: boolean,
 }

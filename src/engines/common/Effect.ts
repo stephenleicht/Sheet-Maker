@@ -4,5 +4,5 @@ export interface Effect {
     type: EffectType,
     subtype?: string,
     key: string,
-    value: number,
+    value: number | boolean,
 }

@@ -1,13 +1,11 @@
-import * as React from 'react';
-
-import { PlayState } from 'engines/common/PlayState';
+import { PlayCharacter } from 'engines/common/play/PlayCharacter';
 import StarfinderCharacter from 'engines/starfinder/StarfinderCharacter';
-
-import { Tabs, Tab, TabBody } from '../Tabs';
+import * as React from 'react';
 import GreebleBox from '../GreebleBox';
+import { Tab, TabBody, Tabs } from '../Tabs';
 import CharacterTab from './CharacterTab';
-
 import * as styles from './PlayMenu.css';
+import SkillsTab from './SkillsTab/SkillsTab';
 
 
 interface MenuState {
@@ -15,8 +13,7 @@ interface MenuState {
 }
 
 export interface MenuProps {
-    playState: PlayState,
-    character: StarfinderCharacter
+    character: PlayCharacter<StarfinderCharacter>
 }
 
 
@@ -36,7 +33,7 @@ export default class PlayMenu extends React.Component<MenuProps, MenuState> {
     }
 
     render() {
-        const { playState, character } = this.props;
+        const { character } = this.props;
         return (
             <div className={styles.wrapper}>
                 <Tabs activeTab={this.state.activeTab} onTabChange={this.onTabChange}>
@@ -44,12 +41,10 @@ export default class PlayMenu extends React.Component<MenuProps, MenuState> {
                         <div className={styles.contentWrapper}>
                             <GreebleBox cutSize={20} corners={{ tl: true, bl: true, br: true }}>
                                 <TabBody name="character">
-                                    <CharacterTab playState={playState} character={character}/>
+                                    <CharacterTab character={character}/>
                                 </TabBody>
                                 <TabBody name="skills">
-                                    <div>
-                                        <strong>Tab 2 kjalsdflkjas dflkajsdf lskjsdf lsdjf lksfjlsakjf sadf</strong>
-                                    </div>
+                                    <SkillsTab character={character} />
                                 </TabBody>
                             </GreebleBox>
                         </div>

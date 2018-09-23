@@ -1,16 +1,9 @@
 import { Field, Model } from 'ghoti';
 import AbilityScores from './AbilityScores';
-import { Effect } from './Effect';
-
-
-export interface CharacterFields {
-    playerName: string;
-    name: string;
-    totalHitPoints: number;
-}
+import { Effect } from '../Effect';
 
 @Model()
-export default class Character implements CharacterFields {
+export default class Character {
     @Field()
     public playerName: string;
     
@@ -27,11 +20,6 @@ export default class Character implements CharacterFields {
         type: Field.arrayOf(String)
     })
     public languages: string[]
-
-
-    constructor(fields: Partial<CharacterFields> = {}) {
-        Object.assign(this, fields);
-    }
 
     public getActiveEffects(): Effect[] {
         return [];
