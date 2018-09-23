@@ -8,10 +8,6 @@ import { Effect } from '../../common/Effect';
 export default class BaseStarfinderRace implements EffectProvider{
     public raceName: StarfinderRaceName;
 
-    constructor(raceName: StarfinderRaceName = StarfinderRaceName.Lashunta) {
-        this.raceName = raceName;
-    }
-
     public getEffects(): Effect[] {
         return []
     }

@@ -18,7 +18,7 @@ export default class PlayApp extends React.Component<{}, PlayAppState> {
     }
 
     async componentDidMount() {
-        const character = await getCharacterByID('5ba0509ac4e88b0c1ffc4de4');
+        const character = await getCharacterByID('5ba7b16137ca2a06c17c2b43');
 
         this.setState({
             character: createPlayCharacter(character)

@@ -1,5 +1,7 @@
 import { Model, Field } from "ghoti";
 
+export type AbilityType = keyof AbilityScores;
+
 @Model()
 export default class AbilityScores {
     @Field()

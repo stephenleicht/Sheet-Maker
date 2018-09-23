@@ -1,19 +1,12 @@
-import {omit} from 'lodash'
-
-import {Model, Field} from 'ghoti';
-import SkillState from "./SkillState";
-
-import SkillInfoIndex, {SkillInfo, SkillIndex} from './SkillInfo';
+import { Field, Model } from 'ghoti';
+import SkillState from "../../common/skills/SkillState";
+import { StarfinderSkillIndex } from './StarfinderSkillIndex';
 
 @Model()
-export default class StarfinderSkills {
+export default class StarfinderSkills implements  StarfinderSkillIndex<SkillState> {
     @Field()
     acrobatics: SkillState = new SkillState();
 
     @Field()
     other: SkillState = new SkillState();
-
-    getInfo(skill: keyof SkillIndex): SkillInfo {
-        return SkillInfoIndex[skill];
-    }
 }

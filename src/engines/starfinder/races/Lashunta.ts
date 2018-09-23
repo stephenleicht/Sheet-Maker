@@ -7,25 +7,20 @@ import {Effect} from '../../common/Effect';
 import {EffectType}  from '../../common/EffectType';
 import {EffectKey} from '../../common/EffectKey';
 
-export enum LashuntaSubspeciesType {
+export enum LashuntaSubspecies {
     Damaya = 'damaya',
     Korasha = 'korasha'
 }
 
-export interface LashuntaRaceInterface {
-    subspecies: LashuntaSubspeciesType
-}
 
 @Model()
-export default class LashuntaRace extends BaseStarfinderRace implements LashuntaRaceInterface {
+export default class LashuntaRace extends BaseStarfinderRace {
+    raceName: StarfinderRaceName.Lashunta = StarfinderRaceName.Lashunta 
+    
     @Field({
-        type: Field.enumOf(LashuntaSubspeciesType)
+        type: Field.enumOf(LashuntaSubspecies)
     })
-    public subspecies: LashuntaSubspeciesType
-
-    constructor() {
-        super(StarfinderRaceName.Lashunta);
-    }
+    public subspecies: LashuntaSubspecies
 
     public getEffects(): Effect[] {
         return [
@@ -33,31 +28,19 @@ export default class LashuntaRace extends BaseStarfinderRace implements Lashunta
                 type: EffectType.Bonus,
                 subtype: 'racial',
                 key: EffectKey.Charisma,
-                value: 1
-            },
-            {
-                type: EffectType.Bonus,
-                key: EffectKey.Charisma,
-                value: 1
-            },
-
-            {
-                type: EffectType.Bonus,
-                subtype: 'racial',
-                key: EffectKey.Charisma,
                 value: 2
             },
             {
                 type: EffectType.Bonus,
                 subtype: 'racial',
-                key: this.subspecies === LashuntaSubspeciesType.Damaya ? EffectKey.Intelligence : EffectKey.Strength,
+                key: this.subspecies === LashuntaSubspecies.Damaya ? EffectKey.Intelligence : EffectKey.Strength,
                 value: 2
             },
             {
                 type: EffectType.Penalty,
                 subtype: 'racial',
-                key: this.subspecies === LashuntaSubspeciesType.Damaya ? EffectKey.Constitution : EffectKey.Wisdom,
-                value: -2
+                key: this.subspecies === LashuntaSubspecies.Damaya ? EffectKey.Constitution : EffectKey.Wisdom,
+                value: 2
             }
         ]
     }

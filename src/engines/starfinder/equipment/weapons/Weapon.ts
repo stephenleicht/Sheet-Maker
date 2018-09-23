@@ -12,9 +12,3 @@ export const WeaponTaggedUnion = Field.taggedUnion('type', {
     [WeaponType.SmallArm]: RangedWeapon,
     [WeaponType.HeavyWeapon]: RangedWeapon,
 })
-
- function test(thing: Weapon) {
-     if(thing.type === WeaponType.SmallArm) {
-         thing.ammoType
-     }
- }

@@ -18,7 +18,7 @@ export function createPlayCharacter<T extends Character>(character: T) {
 }
 
 function isProxiableObject(value: any): value is object {
-    return typeof value === 'object';
+    return typeof value === 'object' && typeof value !== 'function';
 }
 
 function createProxy<T extends object>(playState: PlayState, target: T, path?: string): T {
@@ -26,9 +26,7 @@ function createProxy<T extends object>(playState: PlayState, target: T, path?: s
 
     const handler: ProxyHandler<T> = {
         get(obj, prop: keyof T) {
-            if(['constructor'].includes(prop as string)) {
-                return obj[prop];
-            }
+            const rawValue = obj[prop];
 
             let childPath: string;
             if (path) {
@@ -37,8 +35,6 @@ function createProxy<T extends object>(playState: PlayState, target: T, path?: s
             else {
                 childPath = prop.toString();
             }
-
-            const rawValue = obj[prop];
 
             if (isProxiableObject(rawValue)) {
                 let child;
@@ -53,14 +49,14 @@ function createProxy<T extends object>(playState: PlayState, target: T, path?: s
                 return child;
             }
 
-            if (!playState.effects[childPath]) {
+            const effects = playState.effects[childPath];
+            if (!effects) {
                 return rawValue;
             }
 
-            let retVal: unknown = playState.effects[childPath].set.value ? playState.effects[childPath].set.value : rawValue;
+            let retVal: unknown = effects.set.value ? effects.set.value : rawValue;
             if (isNumber(retVal)) {
-                retVal = retVal + playState.effects[childPath].bonus.value + playState.effects[childPath].penalty.value;
-
+                retVal = retVal + effects.bonus.value - effects.penalty.value;
             }
 
             return retVal;

@@ -65,40 +65,35 @@ export function computePlayStateEffects(character: Character): PlayState['effect
 
         if (effect.type === EffectType.Set) {
             agg[effect.key].set.value = effect.value;
-
         }
-        else {
+        else if(isNumber(effect.value)) {
             if (!effect.subtype) {
                 agg[effect.key][effect.type].untyped = agg[effect.key][effect.type].untyped;
                 agg[effect.key][effect.type].untyped.active.push(effect);
-
-                if (isNumber(effect.value)) {
-                    agg[effect.key][effect.type].untyped.value += effect.value;
-                }
+                agg[effect.key][effect.type].value += effect.value;
             }
             else {
                 agg[effect.key][effect.type].typed[effect.subtype] = agg[effect.key][effect.type].typed[effect.subtype] || {
                     inactive: [],
                     value: 0
                 };
-
-                if (isNumber(effect.value)) {
-                    const existingActiveEffect = agg[effect.key][effect.type].typed[effect.subtype].active
-                    if (!existingActiveEffect ||
-                        (effect.type === EffectType.Bonus && existingActiveEffect.value < effect.value) ||
-                        (effect.type === EffectType.Penalty && existingActiveEffect.value > effect.value)
-                    ) {
-                        agg[effect.key][effect.type].typed[effect.subtype].active = effect;
-                        agg[effect.key][effect.type].typed[effect.subtype].value = effect.value;
-                        agg[effect.key][effect.type].value = effect.value;
-
-                        if (existingActiveEffect) {
-                            agg[effect.key][effect.type].typed[effect.subtype].inactive.push(existingActiveEffect);
-                        }
+    
+                const existingActiveEffect = agg[effect.key][effect.type].typed[effect.subtype].active
+                if (!existingActiveEffect ||
+                    (effect.type === EffectType.Bonus && existingActiveEffect.value < effect.value) ||
+                    (effect.type === EffectType.Penalty && existingActiveEffect.value > effect.value)
+                ) {
+                    agg[effect.key][effect.type].typed[effect.subtype].active = effect;
+                    agg[effect.key][effect.type].typed[effect.subtype].value = effect.value;
+                    agg[effect.key][effect.type].value += effect.value;
+    
+                    if (existingActiveEffect) {
+                        agg[effect.key][effect.type].typed[effect.subtype].inactive.push(existingActiveEffect);
+                        agg[effect.key][effect.type].value -= existingActiveEffect.value;
                     }
-                    else {
-                        agg[effect.key][effect.type].typed[effect.subtype].inactive.push(effect);
-                    }
+                }
+                else {
+                    agg[effect.key][effect.type].typed[effect.subtype].inactive.push(effect);
                 }
             }
         }

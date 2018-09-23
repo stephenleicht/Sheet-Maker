@@ -1,5 +1,5 @@
 import { Field, Model } from "ghoti";
-import { SkillIndex } from "../skills/SkillInfo";
+import { SkillName } from "../skills/StarfinderSkillIndex";
 
 @Model()
 export default class BaseStarfinderClass {
@@ -11,5 +11,5 @@ export default class BaseStarfinderClass {
     })
     public abilities: string[]
 
-    classSkills: Array<keyof SkillIndex>;
+    classSkills: Array<SkillName>;
 }
